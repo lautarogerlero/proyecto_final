@@ -1,6 +1,6 @@
 # _Juego Preguntas y Respuestas_
 
-![logotipo]
+![logotipo](preguntas-respuestas.jpg)
 
 ## ¿Como funciona?
 - El programa recibe la cantidad de jugadores (maximo 4), cantidad de rondas a jugar (maximo 10) y la categoria de las preguntas.
