@@ -36,53 +36,56 @@ if __name__ == "__main__":
         cantidad_jugadores = int(input("Ingrese cuantos jugadores participarán (máximo 4):\n"))
         cantidad_rondas = int(input("Ingrese cuantas rondas van a jugar (máximo 10):\n"))
         categoria = str(input("Que categoria eligen? (interes general, geografia, deportes o todas):\n")).lower()
+        categorias_posibles = ["geografia", "deportes", "interes general", "todas"]
 
         if 0 < cantidad_jugadores <= 4 and 0 < cantidad_rondas <= 10:
+            if categoria in categorias_posibles:
             
-            if categoria == "geografia":
-                # Llama a la función, hace las preguntas y muestra los puntajes finales
-                puntajes = juego(cantidad_rondas, cantidad_jugadores, preguntas_geografia, categoria)
+                if categoria == "geografia":
+                    # Llama a la función, hace las preguntas y muestra los puntajes finales
+                    puntajes = juego(cantidad_rondas, cantidad_jugadores, preguntas_geografia, categoria)
 
-            elif categoria == "deportes":
-                # Llama a la función, hace las preguntas y muestra los puntajes finales
-                puntajes = juego(cantidad_rondas, cantidad_jugadores, preguntas_deportes, categoria)
+                elif categoria == "deportes":
+                    # Llama a la función, hace las preguntas y muestra los puntajes finales
+                    puntajes = juego(cantidad_rondas, cantidad_jugadores, preguntas_deportes, categoria)
                 
-            elif categoria == "interes general":
-                # Llama a la función, hace las preguntas y muestra los puntajes finales
-                puntajes = juego(cantidad_rondas, cantidad_jugadores, preguntas_interes_general, categoria)
+                elif categoria == "interes general":
+                    # Llama a la función, hace las preguntas y muestra los puntajes finales
+                    puntajes = juego(cantidad_rondas, cantidad_jugadores, preguntas_interes_general, categoria)
 
-            elif categoria == "todas":
-                # Llama a la función, hace las preguntas y muestra los puntajes finales
-                puntajes = juego(cantidad_rondas, cantidad_jugadores, preguntas_interes_general, categoria)
+                else:
+                    # Llama a la función, hace las preguntas y muestra los puntajes finales
+                    puntajes = juego(cantidad_rondas, cantidad_jugadores, preguntas_todas, categoria)
+            
+                # Ordenar el diccionario segun los puntajes
+                puntajes_ordenados = sorted(puntajes.items(), key=operator.itemgetter(1), reverse=True)
+                print(f"La tabla de posiciones final es {puntajes_ordenados}")  
+
+                # Guardar al ganador y su puntaje como un diccionario aparte
+                ganador = dict([puntajes_ordenados[0]])
+
+                # Obtener el nombre del ganador
+                nombre_ganador = list(ganador.keys())
+                print(f"El ganador es {nombre_ganador}")
+
+                # Obtener el puntaje del ganador
+                puntaje_ganador = list(ganador.values())
+
+                # Llamar a la función que agrega al ganador y su puntaje al registro final
+                nuevo_ganador = agregar_ganadores(nombre_ganador, puntaje_ganador)
+                print("El registro de ganadores se puede ver en el archivo 'ganadores'.")
+
+                # Desea iniciar un nuevo juego o terminar?
+                seguir = str(input("Si desea finalizar escriba 'FIN', sino se reiniciará el juego:\n")).upper()
+                if seguir == "FIN":
+                    break
 
             else:
                 print("Por favor ingrese una categoria válida")
         
+
         else:
             print("Por favor ingrese una cantidad valida de jugadores y de rondas")
-
-        # Ordenar el diccionario segun los puntajes
-        puntajes_ordenados = sorted(puntajes.items(), key=operator.itemgetter(1), reverse=True)
-        print(f"La tabla de posiciones final es {puntajes_ordenados}")  
-
-        # Guardar al ganador y su puntaje como un diccionario aparte
-        ganador = dict([puntajes_ordenados[0]])
-
-        # Obtener el nombre del ganador
-        nombre_ganador = list(ganador.keys())
-        print(f"El ganador es {nombre_ganador}")
-
-        # Obtener el puntaje del ganador
-        puntaje_ganador = list(ganador.values())
-
-        # Llamar a la función que agrega al ganador y su puntaje al registro final
-        nuevo_ganador = agregar_ganadores(nombre_ganador, puntaje_ganador)
-        print("El registro de ganadores se puede ver en el archivo 'ganadores'.")
-
-        # Desea iniciar un nuevo juego o terminar?
-        seguir = str(input("Si desea finalizar escriba 'FIN', sino se reiniciará el juego:\n")).upper()
-        if seguir == "FIN":
-            break
 
 
 
