@@ -14,9 +14,7 @@ if __name__ == "__main__":
     # Bienvenida e instrucciones
     print("Bienvenidos al juego de preguntas y respuestas!!")
     print("El juego puede tener un máximo de 4 jugadores y 10 rondas. Los jugadores pueden elegir ")
-    print("responder solamente preguntas de geografia, de deportes o de interes general. También")
-    print("tienen la opción de elegir todas las categorias y que en cada ronda se les hagan tres")
-    print("preguntas a cada jugador, una de cada categoría.")
+    print("responder preguntas de geografia, de deportes, de interes general o de todas las categorias.")
     print("Una vez completado el juego pueden cerrarlo o volver a empezar.")
     print("Ahora sí están listos para empezar. Mucha suerte!!")
 
