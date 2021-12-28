@@ -55,6 +55,7 @@ if __name__ == "__main__":
                     # Llama a la función, hace las preguntas y muestra los puntajes finales
                     puntajes = juego(cantidad_rondas, cantidad_jugadores, preguntas_todas, categoria)
             
+
                 # Ordenar el diccionario segun los puntajes
                 puntajes_ordenados = sorted(puntajes.items(), key=operator.itemgetter(1), reverse=True)
                 print(f"La tabla de posiciones final es {puntajes_ordenados}")  
@@ -64,19 +65,32 @@ if __name__ == "__main__":
 
                 # Obtener el nombre del ganador
                 nombre_ganador = list(ganador.keys())
-                print(f"El ganador es {nombre_ganador}")
 
                 # Obtener el puntaje del ganador
                 puntaje_ganador = list(ganador.values())
+                valor_ganador = int(puntaje_ganador[0])
+                puntajes_todos = []
 
-                # Llamar a la función que agrega al ganador y su puntaje al registro final
-                nuevo_ganador = agregar_ganadores(nombre_ganador, puntaje_ganador)
-                print("El registro de ganadores se puede ver en el archivo 'ganadores'.")
+                # Armar lista con todos los puntajes para chequear si hubo empate
+                for i in puntajes_ordenados:
+                    puntajes_todos.append(i[1])
 
-                # Desea iniciar un nuevo juego o terminar?
-                seguir = str(input("Si desea finalizar escriba 'FIN', sino se reiniciará el juego:\n")).upper()
-                if seguir == "FIN":
-                    break
+                # Si hay mas de 1 puntaje máximo, hay empate
+                cuenta = puntajes_todos.count(valor_ganador)
+                if cuenta > 1:
+                    print("Hay un empate!! Los jugadores que empataron pueden volver a jugar para desempatar")
+                    print("El juego se reiniciará")
+                else:
+                    print(f"El ganador es {nombre_ganador}!!")
+
+                    # Llamar a la función que agrega al ganador y su puntaje al registro final
+                    nuevo_ganador = agregar_ganadores(nombre_ganador, puntaje_ganador)
+                    print("El registro de ganadores se puede ver en el archivo 'ganadores'.")
+
+                    # Desea iniciar un nuevo juego o terminar?
+                    seguir = str(input("Si desea finalizar escriba 'FIN', sino se reiniciará el juego:\n")).upper()
+                    if seguir == "FIN":
+                        break
 
             else:
                 print("Por favor ingrese una categoria válida")
@@ -84,8 +98,6 @@ if __name__ == "__main__":
 
         else:
             print("Por favor ingrese una cantidad valida de jugadores y de rondas")
-
-
 
     
 
